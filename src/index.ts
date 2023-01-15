@@ -1,16 +1,17 @@
-import { ICodefendWebpackPluginOptions } from "./models";
-import { obfuscate, codefendDefaultOptions } from "codefend";
+import { WEBPACK_IGNORED_WORDS } from "./constants";
+import { OptionsBuilder } from "./options/builder";
+import { obfuscate } from "codefend";
 import { Compilation, Compiler } from "webpack";
-import { WEBPACK_IGNORED_WORDS } from "./Constants";
+import { ICodefendOptions, ICodefendPluginOptions } from "./options/models";
 
 class WebpackPluginCodefend {
   _name: string;
-  _options;
+  _options: ICodefendOptions;
   _map: Record<string, string> = {};
 
-  constructor(options: ICodefendWebpackPluginOptions) {
+  constructor(options: ICodefendPluginOptions) {
     this._name = "WebpackPluginCodefend";
-    this._options = this.getOptions(options);
+    this._options = new OptionsBuilder(this._name).setOptions(options).setAdditionalIgnoredWords(WEBPACK_IGNORED_WORDS).build();
     this._map = {};
   }
 
@@ -37,23 +38,6 @@ class WebpackPluginCodefend {
         }
       );
     });
-  }
-
-  getOptions(options: ICodefendWebpackPluginOptions) {
-    options = options ?? {};
-    const debug = options.debug ?? codefendDefaultOptions.debug;
-
-    const obfuscationOptions = { ...codefendDefaultOptions.obfuscationOptions, ...(options as ICodefendWebpackPluginOptions) };
-    delete obfuscationOptions["debug"];
-
-    WEBPACK_IGNORED_WORDS.forEach((word) => {
-      obfuscationOptions.ignoredWords.push(word);
-    });
-
-    return {
-      debug,
-      obfuscationOptions,
-    };
   }
 }
 

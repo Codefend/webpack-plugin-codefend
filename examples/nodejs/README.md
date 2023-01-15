@@ -2,12 +2,33 @@
 
 ## Usage
 
+### 1. install dependencies and build
+
 ```bash
 npm install
 npm run build
 ```
 
-## Output
+ <img src="/public/img/nodejs/build.PNG">
+
+### 2. Run bundle
+
+```bash
+node dist/bundle.js
+```
+
+1. "node_module" has not changed as it was added to [ignoredWords](../../README.md#custom-options)
+2. "l_secret" became "123456" as was added to [predefinedWords](../../README.md#custom-options)
+
+ <img src="/public/img/nodejs/run.PNG">
+
+### 3. Open dist/bundle.js
+
+```bash
+code dist/bundle.js
+```
+
+Notice that "c_Calculator" and all the variables are replaced with Ox\*\* words.
 
 To check the encrypted variables in the output: <kbd>Ctrl</kbd> + <kbd>f</kbd> **Ox**
 

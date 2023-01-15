@@ -9,6 +9,8 @@ npm run build
 
 ## Output
 
+To check the encrypted variables in the output: <kbd>Ctrl</kbd> + <kbd>f</kbd> Ox
+
 ```javascript
 /*
  *...

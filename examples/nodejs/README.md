@@ -17,7 +17,7 @@ npm run build
 node dist/bundle.js
 ```
 
-1. "node_module" words has not changed as was added to [ignoredWords](../../README.md#custom-options)
+1. "node_module" has not changed as it was added to [ignoredWords](../../README.md#custom-options)
 2. "l_secret" became "123456" as was added to [predefinedWords](../../README.md#custom-options)
 
  <img src="/public/img/nodejs/run.PNG">

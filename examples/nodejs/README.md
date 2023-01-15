@@ -9,6 +9,10 @@ npm run build
 
 ## Output
 
+<p align="center">
+ <img src="./public/img/node-output.png">
+</p>
+
 To check the encrypted variables in the output: <kbd>Ctrl</kbd> + <kbd>f</kbd> **Ox**
 
 ```javascript

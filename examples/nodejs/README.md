@@ -10,7 +10,7 @@ npm run build
 ```
 
 <p align="center">
- <img src="./public/img/nodejs/build.PNG">
+ <img src="/public/img/nodejs/build.PNG">
 </p>
 
 ### 2. Run bundle
@@ -20,7 +20,7 @@ node dist/bundle.js
 ```
 
 <p align="center">
- <img src="./public/img/nodejs/run.PNG">
+ <img src="/public/img/nodejs/run.PNG">
 </p>
 
 ### 3. check dist/bundle.js

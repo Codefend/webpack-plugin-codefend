@@ -9,9 +9,7 @@ npm install
 npm run build
 ```
 
-<p align="center">
  <img src="/public/img/nodejs/build.PNG">
-</p>
 
 ### 2. Run bundle
 
@@ -19,13 +17,18 @@ npm run build
 node dist/bundle.js
 ```
 
-<p align="center">
+1. "node_module" words has not changed as was added to [ignoredWords](#custom-options)
+2. "l_secret" became "123456" as was added to [predefinedWords](#custom-options)
+
  <img src="/public/img/nodejs/run.PNG">
-</p>
 
-### 3. check dist/bundle.js
+### 3. Open dist/bundle.js
 
-You'll notice that "c_Calculator" and all the variables are replaced with Ox\*\* words.
+```bash
+code dist/bundle.js
+```
+
+Notice that "c_Calculator" and all the variables are replaced with Ox\*\* words.
 
 To check the encrypted variables in the output: <kbd>Ctrl</kbd> + <kbd>f</kbd> **Ox**
 

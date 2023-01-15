@@ -2,16 +2,30 @@
 
 ## Usage
 
+### 1. install dependencies and build
+
 ```bash
 npm install
 npm run build
 ```
 
-## Output
+<p align="center">
+ <img src="./public/img/nodejs/build.PNG">
+</p>
+
+### 2. Run bundle
+
+```bash
+node dist/bundle.js
+```
 
 <p align="center">
- <img src="./public/img/node-output.png">
+ <img src="./public/img/nodejs/run.PNG">
 </p>
+
+### 3. check dist/bundle.js
+
+You'll notice that "c_Calculator" and all the variables are replaced with Ox\*\* words.
 
 To check the encrypted variables in the output: <kbd>Ctrl</kbd> + <kbd>f</kbd> **Ox**
 

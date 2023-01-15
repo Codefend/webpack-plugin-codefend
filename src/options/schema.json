@@ -1,5 +1,5 @@
 {
-  "title": "Codefend Plugin Obfuscation Options",
+  "title": "Codefend Plugin Options",
   "type": "object",
   "additionalProperties": false,
   "properties": {

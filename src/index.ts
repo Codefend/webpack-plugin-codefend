@@ -1,6 +1,7 @@
 import { ICodefendWebpackPluginOptions } from "./models";
 import { obfuscate, codefendDefaultOptions } from "codefend";
 import { Compilation, Compiler } from "webpack";
+import { WEBPACK_IGNORED_WORDS } from "./Constants";
 
 class WebpackPluginCodefend {
   _name: string;
@@ -44,6 +45,10 @@ class WebpackPluginCodefend {
 
     const obfuscationOptions = { ...codefendDefaultOptions.obfuscationOptions, ...(options as ICodefendWebpackPluginOptions) };
     delete obfuscationOptions["debug"];
+
+    WEBPACK_IGNORED_WORDS.forEach((word) => {
+      obfuscationOptions.ignoredWords.push(word);
+    });
 
     return {
       debug,

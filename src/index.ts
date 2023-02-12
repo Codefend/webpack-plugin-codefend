@@ -1,9 +1,9 @@
-import { IObfuscationOptions } from 'codefend/build/src/core/options';
+import { IObfuscationOptions } from "codefend/build/src/core/options";
 import { WEBPACK_IGNORED_WORDS } from "./constants";
 import { OptionsBuilder } from "./options/builder";
-import { obfuscate, buildRuntimeOptions } from "codefend";
+import { obfuscate, buildRuntimeOptions, stats } from "codefend";
 import { Compilation, Compiler } from "webpack";
-import { IRuntimeOptions } from 'codefend/build/src/core/runtime';
+import { IRuntimeOptions } from "codefend/build/src/core/runtime";
 
 class WebpackPluginCodefend {
   _name: string;
@@ -38,6 +38,10 @@ class WebpackPluginCodefend {
           });
         }
       );
+    });
+
+    compiler.hooks.done.tap(this._name, () => {
+      stats({ stats: this._options.stats }, this._runtimeOptions);
     });
   }
 }

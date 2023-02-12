@@ -11,7 +11,7 @@ module.exports = {
   },
   plugins: [
     new WebpackPluginCodefend({
-      debug: true,
+      stats: true,
       prefix: "Ox",
       predefinedWords: [
         {

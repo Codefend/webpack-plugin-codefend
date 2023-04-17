@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "codefend": "^2.1.0",
-    "schema-utils": "^4.0.0"
+    "schema-utils": "^4.0.1"
   },
   "peerDependencies": {
     "webpack": "^5.75.0"

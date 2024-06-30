@@ -1,6 +1,6 @@
 {
   "name": "webpack-plugin-codefend",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Webpack plugin for code obfuscation based on Codefend",
   "keywords": [
     "webpack",
@@ -56,9 +56,11 @@
     "prettier": "^3.3.2",
     "tsup": "^8.1.0",
     "typescript": "^5.5.2",
-    "vitest": "^1.6.0"
+    "vitest": "^1.6.0",
+    "webpack-sources": "^3.2.3"
   },
   "dependencies": {
+    "@types/webpack-sources": "^3.2.3",
     "codefend": "^2.1.0",
     "schema-utils": "^4.2.0"
   },

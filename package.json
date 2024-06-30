@@ -12,7 +12,11 @@
     "obfuscator",
     "uglification",
     "uglify",
-    "uglifier"
+    "uglifier",
+    "vue",
+    "react",
+    "angular",
+    "svelte"
   ],
   "homepage": "https://github.com/Codefend/webpack-plugin-codefend.git",
   "bugs": {
@@ -20,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Codefend/webpack-plugin-codefend.git"
+    "url": "git+https://github.com/Codefend/webpack-plugin-codefend.git"
   },
   "author": "Mounzer Adas",
   "license": "MIT",
@@ -31,19 +35,29 @@
     "dist"
   ],
   "scripts": {
+    "test": "vitest",
+    "test:run": "vitest --run",
     "build": "tsup",
-    "prepack": "npm run build"
+    "lint:check": "eslint src --ext .ts",
+    "spell:check": "cspell \"**\"",
+    "type:check": "tsc --noEmit",
+    "prepack": "npm run lint:check && npm run spell:check && npm run type:check && npm run test:run && npm run build"
   },
   "devDependencies": {
-    "@types/webpack": "^5.28.0",
-    "tsup": "^8.0.2",
-    "typescript": "^5.4.5"
+    "@types/webpack": "^5.28.5",
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.14.1",
+    "eslint": "^8.56.0",
+    "tsup": "^8.1.0",
+    "typescript": "^5.5.2",
+    "vitest": "^1.6.0"
   },
   "dependencies": {
     "codefend": "^2.1.0",
-    "schema-utils": "^4.0.0"
+    "cspell": "^8.9.1",
+    "schema-utils": "^4.2.0"
   },
   "peerDependencies": {
-    "webpack": "^5.75.0"
+    "webpack": "^5.x.x"
   }
 }

@@ -17,8 +17,8 @@ npm run build
 node dist/bundle.js
 ```
 
-1. "node_module" has not changed as it was added to [ignoredWords](../../README.md#custom-options)
-2. "l_secret" became "123456" as was added to [predefinedWords](../../README.md#custom-options)
+1. "node_module" has not changed as it was added to [ignore](https://codefend.github.io/docs/references/configuration)
+2. "l_secret" became "123456" as was added to [static](https://codefend.github.io/docs/references/configuration)
 
  <img src="/public/img/nodejs/run.PNG">
 
@@ -44,7 +44,11 @@ To check the encrypted variables in the output: <kbd>Ctrl</kbd> + <kbd>f</kbd> *
       /*!***************************!*\
   !*** ./src/calculator.js ***!
   \***************************/
-      /***/ (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      /***/ (
+        __unused_webpack_module,
+        __webpack_exports__,
+        __webpack_require__
+      ) => {
         eval(
           '__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   "Ox4": () => (/* binding */ Ox4)\n/* harmony export */ });\nclass Ox4 {\r\n  Ox5(Ox6, Ox7) {\r\n    const Ox8 = Ox6 + Ox7;\r\n    return Ox8;\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack://webpack-plugin-codefend-example/./src/calculator.js?'
         );
@@ -56,7 +60,11 @@ To check the encrypted variables in the output: <kbd>Ctrl</kbd> + <kbd>f</kbd> *
       /*!*********************!*\
   !*** ./src/main.js ***!
   \*********************/
-      /***/ (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      /***/ (
+        __unused_webpack_module,
+        __webpack_exports__,
+        __webpack_require__
+      ) => {
         eval(
           '__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   "default": () => (/* binding */ main)\n/* harmony export */ });\n/* harmony import */ var _calculator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./calculator */ "./src/calculator.js");\n\r\n\r\nconst secret = "123456";\r\nconst node_modules = "node_modules";\r\n\r\nfunction main() {\r\n  const Ox12 = new _calculator__WEBPACK_IMPORTED_MODULE_0__.Ox4();\r\n  const Ox8 = Ox12.Ox5(2, 3);\r\n\r\n  /* 123456 -> 123456 : defined in predefinedWords inside webpack.config.js */\r\n  console.log("secret: ", secret);\r\n\r\n  /* node_modules -> node_modules : defined in ignoredWords inside webpack.config.js */\r\n  console.log("node_modules:", node_modules);\r\n\r\n  /* Ox8 -> Ox4: with prefix l_ will be obfuscated */\r\n  console.log("results: ", Ox8);\r\n}\r\n\r\nmain();\r\n\n\n//# sourceURL=webpack://webpack-plugin-codefend-example/./src/main.js?'
         );

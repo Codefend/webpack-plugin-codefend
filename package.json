@@ -37,18 +37,20 @@
   "scripts": {
     "build": "tsup",
     "lint:check": "eslint src --ext .ts",
-    "prepack": "npm run lint:check && npm run build"
+    "spell:check": "cspell \"**\"",
+    "prepack": "npm run lint:check && npm run spell:check && npm run build"
   },
   "devDependencies": {
     "@types/webpack": "^5.28.0",
-    "tsup": "^8.1.0",
-    "typescript": "^5.4.5",
     "@typescript-eslint/eslint-plugin": "^7.14.1",
     "@typescript-eslint/parser": "^7.14.1",
-    "eslint": "^8.56.0"
+    "eslint": "^8.56.0",
+    "tsup": "^8.1.0",
+    "typescript": "^5.4.5"
   },
   "dependencies": {
     "codefend": "^2.1.0",
+    "cspell": "^8.9.1",
     "schema-utils": "^4.0.0"
   },
   "peerDependencies": {

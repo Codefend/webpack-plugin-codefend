@@ -63,7 +63,7 @@ export default {
       */
       predefinedWords: [
         {
-          originalWord: "predefined_secretword",
+          originalWord: "predefined_secret",
           targetWord: "123456",
         },
       ],

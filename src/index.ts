@@ -5,18 +5,21 @@ import { obfuscate, buildRuntimeOptions, stats } from "codefend";
 import { Compilation, Compiler } from "webpack";
 import { IRuntimeOptions } from "codefend/build/src/core/runtime";
 
-class WebpackPluginCodefend {
+export default class WebpackPluginCodefend {
   _name: string;
   _options: IObfuscationOptions;
   _runtimeOptions: IRuntimeOptions;
 
   constructor(options: IObfuscationOptions) {
     this._name = "WebpackPluginCodefend";
-    this._options = new OptionsBuilder(this._name).setOptions(options).setAdditionalIgnoredWords(WEBPACK_IGNORED_WORDS).build();
+    this._options = new OptionsBuilder(this._name)
+      .setOptions(options)
+      .setAdditionalIgnoredWords(WEBPACK_IGNORED_WORDS)
+      .build();
     this._runtimeOptions = buildRuntimeOptions();
   }
 
-  apply(compiler: Compiler) {
+  apply(compiler: Compiler): void {
     compiler.hooks.compilation.tap(this._name, (compilation: Compilation) => {
       compilation.hooks.processAssets.tap(
         {
@@ -24,16 +27,16 @@ class WebpackPluginCodefend {
         },
         (assets) => {
           Object.entries(assets).forEach(([fileName, source]) => {
-            let outputContent = obfuscate(source.source() as string, this._options, this._runtimeOptions);
-            //@ts-ignore
-            compilation.assets[fileName] = {
-              ...compilation.assets[fileName],
-              source: () => {
-                return outputContent;
-              },
-              size: () => {
-                return outputContent.length;
-              },
+            const outputContent = obfuscate(
+              source.source() as string,
+              this._options,
+              this._runtimeOptions
+            );
+            compilation.assets[fileName].source = (): string | Buffer => {
+              return outputContent;
+            };
+            compilation.assets[fileName].size = (): number => {
+              return outputContent.length;
             };
           });
         }
@@ -45,5 +48,3 @@ class WebpackPluginCodefend {
     });
   }
 }
-
-module.exports = WebpackPluginCodefend;

@@ -1,19 +1,20 @@
 import { IObfuscationOptions } from "codefend/build/src/core/options";
-import { WEBPACK_IGNORED_WORDS } from "./constants";
-import { OptionsBuilder } from "./options/builder";
 import { obfuscate, buildRuntimeOptions, stats } from "codefend";
 import { Compilation, Compiler } from "webpack";
 import { IRuntimeOptions } from "codefend/build/src/core/runtime";
+import { WEBPACK_IGNORED_WORDS } from "./data/Constants";
+import { OptionsBuilder } from "./options/OptionsBuilder";
+import { IWebpackCodefendOptions } from "./data/Types";
 
 export default class WebpackPluginCodefend {
   _name: string;
   _options: IObfuscationOptions;
   _runtimeOptions: IRuntimeOptions;
 
-  constructor(options: IObfuscationOptions) {
+  constructor(options?: IWebpackCodefendOptions) {
     this._name = "WebpackPluginCodefend";
     this._options = new OptionsBuilder(this._name)
-      .setOptions(options)
+      .setOptions(options ?? {})
       .setAdditionalIgnoredWords(WEBPACK_IGNORED_WORDS)
       .build();
     this._runtimeOptions = buildRuntimeOptions();

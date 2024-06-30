@@ -1,13 +1,12 @@
-const WebpackPluginCodefend = require("webpack-plugin-codefend");
+import { WebpackPluginCodefend } from "webpack-plugin-codefend";
+import { resolve, dirname } from "path";
 
-const path = require("path");
-
-module.exports = {
+export default {
   mode: "development",
   entry: "./src/main.js",
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "dist"),
+    path: resolve(dirname, "dist"),
   },
   plugins: [
     new WebpackPluginCodefend({

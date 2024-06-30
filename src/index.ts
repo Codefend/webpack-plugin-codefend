@@ -6,7 +6,7 @@ import { WEBPACK_IGNORED_WORDS } from "./data/Constants";
 import { OptionsBuilder } from "./options/OptionsBuilder";
 import { IWebpackCodefendOptions } from "./data/Types";
 
-export default class WebpackPluginCodefend {
+export class WebpackPluginCodefend {
   _name: string;
   _options: IObfuscationOptions;
   _runtimeOptions: IRuntimeOptions;

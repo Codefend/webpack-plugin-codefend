@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import WebpackPluginCodefend from "..";
+import { WebpackPluginCodefend } from "..";
 
 describe("Plugin: General Behavior", () => {
   it("has correct name", () => {

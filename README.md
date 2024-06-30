@@ -27,7 +27,7 @@ Add to your `webpack.config.js`:
 #### Default options
 
 ```js
-import WebpackPluginCodefend from "webpack-plugin-codefend";
+import { WebpackPluginCodefend } from "webpack-plugin-codefend";
 
 export default {
   entry: ...
@@ -39,7 +39,7 @@ export default {
 #### Custom options
 
 ```js
-import WebpackPluginCodefend from "webpack-plugin-codefend";
+import { WebpackPluginCodefend } from "webpack-plugin-codefend";
 
 export default {
   entry: ...

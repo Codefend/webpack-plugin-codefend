@@ -5,7 +5,7 @@ import { obfuscate, buildRuntimeOptions, stats } from "codefend";
 import { Compilation, Compiler } from "webpack";
 import { IRuntimeOptions } from "codefend/build/src/core/runtime";
 
-class WebpackPluginCodefend {
+export default class WebpackPluginCodefend {
   _name: string;
   _options: IObfuscationOptions;
   _runtimeOptions: IRuntimeOptions;
@@ -48,5 +48,3 @@ class WebpackPluginCodefend {
     });
   }
 }
-
-module.exports = WebpackPluginCodefend;

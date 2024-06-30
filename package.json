@@ -35,10 +35,13 @@
     "dist"
   ],
   "scripts": {
+    "test": "vitest",
+    "test:run": "vitest --run",
     "build": "tsup",
     "lint:check": "eslint src --ext .ts",
     "spell:check": "cspell \"**\"",
-    "prepack": "npm run lint:check && npm run spell:check && npm run build"
+    "type:check": "tsc --noEmit",
+    "prepack": "npm run lint:check && npm run spell:check && npm run type:check && npm run test:run && npm run build"
   },
   "devDependencies": {
     "@types/webpack": "^5.28.0",
@@ -46,7 +49,8 @@
     "@typescript-eslint/parser": "^7.14.1",
     "eslint": "^8.56.0",
     "tsup": "^8.1.0",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
   },
   "dependencies": {
     "codefend": "^2.1.0",

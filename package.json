@@ -58,6 +58,6 @@
     "schema-utils": "^4.0.0"
   },
   "peerDependencies": {
-    "webpack": "^5.75.0"
+    "webpack": "^5.x.x"
   }
 }

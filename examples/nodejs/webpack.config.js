@@ -1,5 +1,5 @@
-const WebpackPluginCodefend = require("../../lib/cjs/index");
-const webpack = require("webpack");
+const WebpackPluginCodefend = require("webpack-plugin-codefend");
+
 const path = require("path");
 
 module.exports = {
@@ -11,22 +11,20 @@ module.exports = {
   },
   plugins: [
     new WebpackPluginCodefend({
-      stats: true,
-      prefix: "Ox",
-      predefinedWords: [
-        {
-          originalWord: "predefined_secret",
-          targetWord: "123456",
-        },
-      ],
-      ignoredWords: ["node_modules"],
-      regexList: [
-        {
-          name: "main",
-          value: "([a-zA-Z]+(_[a-zA-Z0-9]+)+)",
-          flag: "g",
-        },
-      ],
+      transformation: {
+        prefix: "Ox",
+        static: [
+          {
+            from: "predefined_secret",
+            to: "123456",
+          },
+        ],
+        ignore: ["node_modules"],
+      },
+
+      debug: {
+        stats: true,
+      },
     }),
   ],
 };

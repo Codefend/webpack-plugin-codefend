@@ -23,6 +23,16 @@ jobs:
       - name: 🛡️ Audit
         run: npm audit --audit-level=high
 
+  format:
+    name: 🔬 Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - uses: bahmutov/npm-install@v1
+      - name: 🔬 Format
+        run: npm run format:check
+
   spell:
     name: 🈸 Spellcheck
     runs-on: ubuntu-latest
@@ -55,7 +65,7 @@ jobs:
 
   build:
     name: 🚀 Build
-    needs: [lint, audit, spell, type, test]
+    needs: [lint, audit, format, spell, type, test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

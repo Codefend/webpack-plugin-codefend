@@ -44,7 +44,7 @@
     "prepack": "npm run lint:check && npm run spell:check && npm run type:check && npm run test:run && npm run build"
   },
   "devDependencies": {
-    "@types/webpack": "^5.28.0",
+    "@types/webpack": "^5.28.5",
     "@typescript-eslint/eslint-plugin": "^7.14.1",
     "@typescript-eslint/parser": "^7.14.1",
     "eslint": "^8.56.0",

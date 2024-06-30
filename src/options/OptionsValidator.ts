@@ -1,7 +1,7 @@
 import { validate } from "schema-utils";
-import schema from "@/options/schema.json";
+import schema from "./schema.json";
 import { JSONSchema7 } from "schema-utils/declarations/ValidationError";
-import { IWebpackCodefendOptions } from "@/data/Types";
+import { IWebpackCodefendOptions } from "../data/Types";
 
 class OptionsValidator {
   validateOptions(name: string, pluginOptions: IWebpackCodefendOptions): void {

@@ -1,8 +1,8 @@
 import { IObfuscationOptions } from "codefend/build/src/core/options";
 import { buildObfuscationOptions } from "codefend";
-import { IWebpackCodefendOptions } from "../data/Types";
-import OptionsAdapter from "./OptionsAdapter";
-import OptionsValidator from "./OptionsValidator";
+import { IWebpackCodefendOptions } from "@/data/Types";
+import OptionsAdapter from "@/options/OptionsAdapter";
+import OptionsValidator from "@/options/OptionsValidator";
 
 export class OptionsBuilder {
   name: string;

@@ -1,6 +1,6 @@
 import { IObfuscationOptions, IPredefinedWordOption, IRegexListOption } from "codefend/build/src/core/options";
-import { IWebpackCodefendOptions } from "../data/Types";
-import { DEFAULT_TRANSFORMATION_PREFIX, DEFAULT_PARSER_REGEX_LIST } from "../data/Constants";
+import { IWebpackCodefendOptions } from "@/data/Types";
+import { DEFAULT_TRANSFORMATION_PREFIX, DEFAULT_PARSER_REGEX_LIST } from "@/data/Constants";
 
 class OptionsAdapter {
   transform(pluginOptions: IWebpackCodefendOptions): IObfuscationOptions {

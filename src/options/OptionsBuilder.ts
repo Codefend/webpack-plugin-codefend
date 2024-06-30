@@ -16,9 +16,7 @@ export class OptionsBuilder {
 
   setOptions(pluginOptions: IWebpackCodefendOptions): this {
     this.pluginOptions = pluginOptions;
-    this.libraryOptions = buildObfuscationOptions(
-      OptionsAdapter.transform(pluginOptions)
-    );
+    this.libraryOptions = buildObfuscationOptions(OptionsAdapter.transform(pluginOptions));
     return this;
   }
 

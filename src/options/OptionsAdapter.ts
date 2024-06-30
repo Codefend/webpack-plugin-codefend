@@ -1,13 +1,6 @@
-import {
-  IObfuscationOptions,
-  IPredefinedWordOption,
-  IRegexListOption,
-} from "codefend/build/src/core/options";
+import { IObfuscationOptions, IPredefinedWordOption, IRegexListOption } from "codefend/build/src/core/options";
 import { IWebpackCodefendOptions } from "../data/Types";
-import {
-  DEFAULT_TRANSFORMATION_PREFIX,
-  DEFAULT_PARSER_REGEX_LIST,
-} from "../data/Constants";
+import { DEFAULT_TRANSFORMATION_PREFIX, DEFAULT_PARSER_REGEX_LIST } from "../data/Constants";
 
 class OptionsAdapter {
   transform(pluginOptions: IWebpackCodefendOptions): IObfuscationOptions {
@@ -25,17 +18,13 @@ class OptionsAdapter {
   }
 
   private prefix(pluginOptions: IWebpackCodefendOptions): string {
-    return (
-      pluginOptions?.transformation?.prefix ?? DEFAULT_TRANSFORMATION_PREFIX
-    );
+    return pluginOptions?.transformation?.prefix ?? DEFAULT_TRANSFORMATION_PREFIX;
   }
 
   private ignoredWords(pluginOptions: IWebpackCodefendOptions): string[] {
     return pluginOptions?.transformation?.ignore ?? [];
   }
-  private predefinedWords(
-    pluginOptions: IWebpackCodefendOptions
-  ): IPredefinedWordOption[] {
+  private predefinedWords(pluginOptions: IWebpackCodefendOptions): IPredefinedWordOption[] {
     return (
       pluginOptions?.transformation?.static?.map(({ from, to }) => {
         return {
@@ -45,9 +34,7 @@ class OptionsAdapter {
       }) ?? []
     );
   }
-  private regexList(
-    pluginOptions: IWebpackCodefendOptions
-  ): IRegexListOption[] {
+  private regexList(pluginOptions: IWebpackCodefendOptions): IRegexListOption[] {
     return (
       pluginOptions?.parser?.regexList?.map((e) => {
         return {

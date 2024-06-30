@@ -6,7 +6,7 @@ import { WEBPACK_IGNORED_WORDS } from "./data/Constants";
 import { OptionsBuilder } from "./options/OptionsBuilder";
 import { IWebpackCodefendOptions } from "./data/Types";
 
-export default class WebpackPluginCodefend {
+export class WebpackPluginCodefend {
   _name: string;
   _options: IObfuscationOptions;
   _runtimeOptions: IRuntimeOptions;
@@ -28,11 +28,7 @@ export default class WebpackPluginCodefend {
         },
         (assets) => {
           Object.entries(assets).forEach(([fileName, source]) => {
-            const outputContent = obfuscate(
-              source.source() as string,
-              this._options,
-              this._runtimeOptions
-            );
+            const outputContent = obfuscate(source.source() as string, this._options, this._runtimeOptions);
             compilation.assets[fileName].source = (): string | Buffer => {
               return outputContent;
             };
@@ -40,7 +36,7 @@ export default class WebpackPluginCodefend {
               return outputContent.length;
             };
           });
-        }
+        },
       );
     });
 

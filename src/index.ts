@@ -6,9 +6,9 @@ import { ICodefendRuntimeOptions, IWebpackCodefendInternalOptions, IWebpackCodef
 import { ConcatSource } from "webpack-sources";
 
 export class WebpackPluginCodefend {
-  _name: string;
-  ___options: IWebpackCodefendInternalOptions;
-  _runtimeOptions: ICodefendRuntimeOptions;
+  readonly _name: string;
+  readonly ___options: IWebpackCodefendInternalOptions;
+  readonly _runtimeOptions: ICodefendRuntimeOptions;
 
   constructor(options?: IWebpackCodefendOptions) {
     this._name = "WebpackPluginCodefend";
@@ -21,15 +21,19 @@ export class WebpackPluginCodefend {
 
   apply(compiler: Compiler): void {
     compiler.hooks.compilation.tap(this._name, (compilation: Compilation) => {
-      compilation.hooks.optimizeChunkAssets.tap(this._name, (chunks) => {
-        chunks.forEach((chunk) => {
-          chunk.files.forEach((fileName) => {
+      compilation.hooks.processAssets.tap(
+        {
+          name: this._name,
+          stage: Compilation.PROCESS_ASSETS_STAGE_DERIVED,
+        },
+        (assets) => {
+          Object.keys(assets).forEach((fileName) => {
             const source = this._getFileSource(compilation, fileName);
             const obfuscatedSource = this._obfuscateSource(source);
             this._overrideFileSource(compilation, fileName, obfuscatedSource);
           });
-        });
-      });
+        },
+      );
     });
 
     compiler.hooks.done.tap(this._name, () => {

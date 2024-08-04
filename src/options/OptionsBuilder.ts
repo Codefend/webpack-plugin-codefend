@@ -23,12 +23,20 @@ export class OptionsBuilder {
     return this;
   }
 
+  private _fillAdditionalIgnoreWords(): void {
+    const ignoreSet = new Set(this.libraryOptions.transformation.ignore);
+
+    this.additionalIgnoredWords.forEach((word) => {
+      ignoreSet.add(word);
+    });
+
+    this.libraryOptions.transformation.ignore = Array.from(ignoreSet);
+  }
+
   build(): IWebpackCodefendInternalOptions {
     OptionsValidator.validateOptions(this.name, this.pluginOptions);
 
-    this.additionalIgnoredWords.forEach((word) => {
-      this.libraryOptions.transformation.ignore.push(word);
-    });
+    this._fillAdditionalIgnoreWords();
     return this.libraryOptions;
   }
 }

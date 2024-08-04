@@ -13,5 +13,7 @@ export const WEBPACK_IGNORED_WORDS = [
   "webpack_require",
   "WEBPACK_IMPORTED_MODULE_0",
   "webpack_module_cache",
+  "unused_webpack",
+  "webpack_module",
 ];
 export const DEFAULT_PARSER_NAME = "codeOnly";

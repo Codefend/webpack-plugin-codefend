@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@types/webpack": "^5.28.5",
+    "@types/webpack-sources": "^3.2.3",
     "@typescript-eslint/eslint-plugin": "^7.16.1",
     "@typescript-eslint/parser": "^7.18.0",
     "cspell": "^8.10.4",
@@ -57,11 +58,10 @@
     "tsup": "^8.1.0",
     "typescript": "^5.5.3",
     "vitest": "^2.0.4",
-    "webpack-sources": "^3.2.3",
-    "@types/webpack-sources": "^3.2.3"
+    "webpack-sources": "^3.2.3"
   },
   "dependencies": {
-    "codefend": "^2.1.0",
+    "codefend": "^3.1.0",
     "schema-utils": "^4.2.0"
   },
   "peerDependencies": {

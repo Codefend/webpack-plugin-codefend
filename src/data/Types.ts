@@ -1,23 +1,23 @@
+import type {
+  ICodefendDebugOptions,
+  ICodefendTransformationOptions,
+  ICodefendInternalDebugOptions,
+  ICodefendInternalParserOptions,
+  ICodefendInternalTransformationOptions,
+  buildRuntimeOptions,
+} from "codefend";
+
 export type IWebpackCodefendOptions = {
-  transformation?: {
-    prefix?: string;
-    static?: ICodefendTransformationStatic[];
-    ignore?: string[];
-  };
-  debug?: {
-    stats?: boolean;
-  };
-  parser?: {
-    regexList?: ICodefendParserRegexListItem[];
-  };
+  transformation?: ICodefendTransformationOptions;
+  debug?: IWebpackCodefendDebugOptions;
 };
 
-export type ICodefendParserRegexListItem = {
-  name: string;
-  value: string;
+export type IWebpackCodefendInternalOptions = {
+  transformation: ICodefendInternalTransformationOptions;
+  debug: ICodefendInternalDebugOptions;
+  parser: ICodefendInternalParserOptions;
 };
 
-export type ICodefendTransformationStatic = {
-  from: string;
-  to: string;
-};
+type IWebpackCodefendDebugOptions = Omit<ICodefendDebugOptions, "ignoredWarnings">;
+
+export type ICodefendRuntimeOptions = ReturnType<typeof buildRuntimeOptions>;

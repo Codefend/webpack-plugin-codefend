@@ -1,20 +1,18 @@
-import { IObfuscationOptions } from "codefend/build/src/core/options";
 import { obfuscate, buildRuntimeOptions, stats } from "codefend";
 import { Compilation, Compiler } from "webpack";
-import { IRuntimeOptions } from "codefend/build/src/core/runtime";
 import { WEBPACK_IGNORED_WORDS } from "./data/Constants";
 import { OptionsBuilder } from "./options/OptionsBuilder";
-import { IWebpackCodefendOptions } from "./data/Types";
+import { ICodefendRuntimeOptions, IWebpackCodefendInternalOptions, IWebpackCodefendOptions } from "./data/Types";
 import { ConcatSource } from "webpack-sources";
 
 export class WebpackPluginCodefend {
   _name: string;
-  _options: IObfuscationOptions;
-  _runtimeOptions: IRuntimeOptions;
+  ___options: IWebpackCodefendInternalOptions;
+  _runtimeOptions: ICodefendRuntimeOptions;
 
   constructor(options?: IWebpackCodefendOptions) {
     this._name = "WebpackPluginCodefend";
-    this._options = new OptionsBuilder(this._name)
+    this.___options = new OptionsBuilder(this._name)
       .setOptions(options ?? {})
       .setAdditionalIgnoredWords(WEBPACK_IGNORED_WORDS)
       .build();
@@ -35,7 +33,7 @@ export class WebpackPluginCodefend {
     });
 
     compiler.hooks.done.tap(this._name, () => {
-      stats({ stats: this._options.stats }, this._runtimeOptions);
+      stats({ stats: this.___options.debug.stats }, this._runtimeOptions);
     });
   }
 
@@ -44,7 +42,7 @@ export class WebpackPluginCodefend {
   }
 
   private _obfuscateSource(source: string): string {
-    return obfuscate(source, this._options, this._runtimeOptions);
+    return obfuscate(source, this.___options.transformation, this.___options.parser, this._runtimeOptions);
   }
   private _overrideFileSource(compilation: Compilation, fileName: string, source: string): void {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

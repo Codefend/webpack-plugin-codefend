@@ -61,7 +61,7 @@
     "webpack-sources": "^3.2.3"
   },
   "dependencies": {
-    "codefend": "^3.1.0",
+    "codefend": "^3.2.0",
     "schema-utils": "^4.2.0"
   },
   "peerDependencies": {

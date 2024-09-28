@@ -40,7 +40,7 @@
     "test": "vitest",
     "test:run": "vitest --run",
     "build": "tsup",
-    "lint:check": "eslint src --ext .ts",
+    "lint:check": "eslint src",
     "spell:check": "cspell \"**\"",
     "type:check": "tsc --noEmit",
     "prepack": "npm run lint:check && npm run spell:check && npm run type:check && npm run test:run && npm run build"

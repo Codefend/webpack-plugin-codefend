@@ -50,7 +50,7 @@
     "@types/webpack-sources": "^3.2.3",
     "@typescript-eslint/eslint-plugin": "^8.8.0",
     "@typescript-eslint/parser": "^8.8.0",
-    "cspell": "^8.14.2",
+    "cspell": "^8.17.1",
     "eslint": "^9.11.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",

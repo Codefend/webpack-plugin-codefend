@@ -1,12 +1,13 @@
 import { WebpackPluginCodefend } from "webpack-plugin-codefend";
-import { resolve, dirname } from "path";
+import { fileURLToPath } from "node:url";
 
 export default {
+  context: fileURLToPath(new URL(".", import.meta.url)),
   mode: "development",
   entry: "./src/main.js",
   output: {
     filename: "bundle.js",
-    path: resolve(dirname, "dist"),
+    path: fileURLToPath(new URL("./dist", import.meta.url)),
   },
   plugins: [
     new WebpackPluginCodefend({

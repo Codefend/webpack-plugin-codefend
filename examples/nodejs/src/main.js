@@ -1,4 +1,4 @@
-import { c_Calculator } from "./calculator";
+import { c_Calculator } from "./calculator.js";
 
 const secret = "predefined_secret";
 const node_modules = "node_modules";

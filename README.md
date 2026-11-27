@@ -12,7 +12,7 @@
 
 Webpack plugin for code obfuscation based on [Codefend](https://www.npmjs.com/package/codefend).
 
-Supports Webpack 5. The plugin requires Node.js 18 or newer.
+Supports Webpack 5.
 
 ## Installation
 

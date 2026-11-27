@@ -12,7 +12,7 @@
 
 Webpack plugin for code obfuscation based on [Codefend](https://www.npmjs.com/package/codefend).
 
-Supports Webpack 5. Requires Node.js 18 or newer.
+Supports Webpack 5. The plugin requires Node.js 18 or newer.
 
 ## Installation
 
@@ -84,7 +84,7 @@ export default {
 
 `transformation.ignore` contains words to preserve, not file paths or module filters. Statistics are enabled by default; use `debug: { stats: false }` to disable them.
 
-The plugins use Codefend's `codeOnly` parser. CLI options for copying source files, renaming files and folders, and selecting custom parsers are not exposed. See the [configuration reference](https://codefend.github.io/docs/references/configuration) for transformation details.
+The plugin uses Codefend's `codeOnly` parser. CLI options for copying source files, renaming files and folders, and selecting custom parsers are not exposed. See the [configuration reference](https://codefend.github.io/docs/references/configuration) for transformation details.
 
 ### Naming convention
 

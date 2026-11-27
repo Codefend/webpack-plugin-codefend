@@ -35,8 +35,8 @@
     "dist"
   ],
   "scripts": {
-    "format": "prettier --write \"{src/**/*.ts,scripts/**/*.mjs,*.{ts,mts},*.js,examples/**/*.js}\"",
-    "format:check": "prettier --check \"{src/**/*.ts,scripts/**/*.mjs,*.{ts,mts},*.js,examples/**/*.js}\"",
+    "format": "prettier --write \"{src/**/*.ts,scripts/**/*.mjs,*.{ts,mts},*.js}\"",
+    "format:check": "prettier --check \"{src/**/*.ts,scripts/**/*.mjs,*.{ts,mts},*.js}\"",
     "test": "vitest",
     "test:run": "vitest --run",
     "build": "tsdown",

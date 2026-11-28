@@ -10,11 +10,13 @@
 ![NPM](https://img.shields.io/node/v/webpack-plugin-codefend)
 ![NPM](https://img.shields.io/npm/l/webpack-plugin-codefend)
 
-Webpack plugin for code obfuscation based on [Codefend](https://www.npmjs.com/package/codefend)
+Webpack plugin for code obfuscation based on [Codefend](https://www.npmjs.com/package/codefend).
 
-Requires Webpack 5 and Node.js 18 or newer.
+Supports Webpack 5.
 
 ## Installation
+
+Install the plugin in your existing Webpack project:
 
 ```bash
 npm install -D webpack-plugin-codefend
@@ -22,138 +24,137 @@ npm install -D webpack-plugin-codefend
 
 ## Usage
 
-### `Step 1`: Configuration
+### Recommended setup
 
-Add to your `webpack.config.js`:
-
-#### Default options
+Add the plugin to your `webpack.config.mjs`. Keep any other plugins and build settings your project needs.
 
 ```js
+import { fileURLToPath } from "node:url";
 import { WebpackPluginCodefend } from "webpack-plugin-codefend";
 
 export default {
-  entry: ...
-  output: ...,
-  plugins: [new WebpackPluginCodefend()],
+  mode: "production",
+  entry: "./src/main.js",
+  output: {
+    filename: "bundle.js",
+    path: fileURLToPath(new URL("./dist", import.meta.url)),
+  },
+  plugins: [new WebpackPluginCodefend({ parser: { name: "startWithMAndUnderscore" } })],
 };
 ```
 
-#### Custom options
+### Custom options
+
+Configure parser selection, obfuscation, and statistics with the `parser`, `transformation`, and `debug` options:
 
 ```js
+import { fileURLToPath } from "node:url";
 import { WebpackPluginCodefend } from "webpack-plugin-codefend";
 
 export default {
-  entry: ...
-  output: ...,
+  mode: "production",
+  entry: "./src/main.js",
+  output: {
+    filename: "bundle.js",
+    path: fileURLToPath(new URL("./dist", import.meta.url)),
+  },
   plugins: [
     new WebpackPluginCodefend({
-      transformation:{
-            // the prefix to use for each obfuscated variable
-            prefix: "Ox",
+      parser: { name: "startWithMAndUnderscore" },
+      transformation: {
+        // Prefix for generated names.
+        prefix: "Ox",
 
-            // control how a specific variable should be obfuscated
-            static: [
-              {
-                from: "predefined_secret",
-                to: "123456",
-              },
-            ],
+        // Explicit replacements for selected words.
+        static: [{ from: "predefined_secret", to: "123456" }],
 
-            //will skip obfuscation for the following words
-            ignore: ["node_modules"],
+        // Words that should retain their original spelling.
+        ignore: ["node_modules"],
 
-            /* By using everyday words such as books or lorem ipsum in the pool,
-            you can subtly obfuscate your code,
-            concealing its true nature without making it apparent that obfuscation is occurring.*/
-            pool: ["QueenOfHeart"],
+        // Optional names to use before generating prefixed names.
+        pool: ["QueenOfHeart"],
       },
       debug: {
-            // to display detailed stats about the words that have been obfuscated
-            stats: true,
+        // Display statistics for transformed words.
+        stats: true,
       },
     }),
   ],
 };
 ```
 
-For a more detailed explanation, refer to the [configuration](https://codefend.github.io/docs/references/configuration) section of the `codefend` docs.
+`transformation.ignore` contains words to preserve, not file paths or module filters. Statistics are enabled by default; use `debug: { stats: false }` to disable them.
 
-### `Step 2`: Naming convention
+### Parser selection
 
-In your code, `add prefixes to the words that you want Codefend to obfuscate.`
+`parser.name` accepts these two presets:
 
-Codefend transforms identifiers that match its naming conventions.
+| Name                      | Selection                                                             |
+| ------------------------- | --------------------------------------------------------------------- |
+| `startWithMAndUnderscore` | Recommended for new projects: explicitly marked `m_` names.           |
+| `codeOnly`                | The existing broader underscore naming rule; retained as the default. |
+
+We recommend `startWithMAndUnderscore` because narrower selection helps leave unrelated names such as `external_value` and `LED_BUILTIN` unchanged. Use lowercase `m_`, followed by an ASCII letter and then letters or digits. For example, `m_Total` and `m_value2` are selected; `m_2total` and `m_total_amount` are excluded.
+
+Omitting `parser`, using `parser: {}`, or selecting `codeOnly` preserves the existing selection behavior. Custom regex lists and other core presets are not accepted by this plugin. Explicit static mappings still apply to their configured literal keys.
+
+CLI settings for source copying and file/folder renaming are separate. See [parser presets](https://codefend.github.io/docs/advanced-usage/parser/presets) and the [configuration reference](https://codefend.github.io/docs/references/configuration).
+
+### Naming convention
+
+Use the recommended `m_` convention for application-owned names whose callers you control:
 
 ```js
-//node js example
-//as a starting point:  prefix the words that should be obfuscated with l_
-
-class l_Calculator {
-  l_sum(l_a, l_b) {
-    const l_results = l_a + l_b;
-    console.log("node_modules");
-    console.log("predefined_secret");
-    return l_results;
-  }
+function m_add(m_left, m_right) {
+  return m_left + m_right;
 }
 
-//>>>>>>==== Will Become ======<<<<<<
-
-class QueenOfHeart /* 'QueenOfHeart' defined in pool*/ {
-  /* Ox1, Ox2... prefix transformation*/
-  Ox1(Ox2, Ox3) {
-    const Ox4 = Ox2 + Ox3;
-    console.log("node_modules"); // has not been obfuscated
-    console.log("123456"); // has transformed from "predefined_secret" to "123456"
-    return Ox4;
-  }
-}
+console.log(m_add(2, 3));
 ```
 
-```html
-<!-- Html example, can work also with Angular,React,Vue,Svelte... in the same way -->
+Both supported parsers select these `m_` names:
 
-<html>
-  <head>
-    <style>
-      .l_red {
-        color: red;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="l_red">l_secret</div>
-    <div class="l_red">Hello World</div>
-  </body>
-</html>
+```js
+function Ox0(Ox1, Ox2) {
+  return Ox1 + Ox2;
+}
 
-<!-- Will Become -->
+console.log(Ox0(2, 3));
+```
 
-<html>
-  <head>
-    <style>
-      .Ox1 {
-        color: red;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="Ox1">Ox0</div>
-    <div class="Ox1">Hello World</div>
-  </body>
-</html>
+Both versions print `5`. Generated names can vary with the input and build order. See the [code naming conventions](https://codefend.github.io/docs/basic-usage/naming-conventions/code-naming-convention) for other supported prefixes.
+
+Codefend matches source text, so replacements can also affect strings and property names. Keep public exports, framework APIs, and external data contracts stable with `transformation.ignore`, and test the built application. Test custom pools across all modules before adopting them.
+
+## Migrate an existing project with AI
+
+Use the [AI migration prompt](https://codefend.github.io/docs/basic-usage/naming-conventions/ai-assisted-migration) to adapt an existing project's internal variables, functions, classes, parameters, and members to Codefend's naming conventions. The guide provides a copyable prompt that asks your coding assistant to update references, preserve external interfaces and data keys, and test both the renamed source and the Codefend output.
+
+## Build behavior
+
+The plugin transforms emitted assets during Webpack's asset-processing stage and prints statistics when compilation finishes. It runs whenever included in the configuration; the examples above configure a production build.
+
+For development builds, include the plugin conditionally in your existing configuration if you want to leave development output unchanged. Verify emitted CSS, binary assets, multiple chunks, and interactions with other asset plugins in your application.
+
+Build with your usual project command, or run:
+
+```bash
+npx webpack --config webpack.config.mjs
 ```
 
 ## Examples
 
-1. ### [`Node js`](./examples/nodejs/)
+Follow the [Webpack example](https://codefend.github.io/docs/examples/webpack) in the Codefend documentation for complete source code, configuration, build commands, and expected output.
+
+## Documentation
+
+- [Codefend documentation](https://codefend.github.io/docs/)
+- [All language and build examples](https://codefend.github.io/docs/examples/list)
+- [Vite plugin](https://www.npmjs.com/package/vite-plugin-codefend), [esbuild plugin](https://www.npmjs.com/package/esbuild-plugin-codefend), [Rollup plugin](https://www.npmjs.com/package/rollup-plugin-codefend), and [Webpack plugin](https://www.npmjs.com/package/webpack-plugin-codefend)
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
+Pull requests and bug reports are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md) for development commands and contribution guidelines.
 
 ## License
 

@@ -8,6 +8,7 @@ import type {
 } from "codefend";
 
 export type IWebpackCodefendOptions = {
+  parser?: { name?: "codeOnly" | "startWithMAndUnderscore" };
   transformation?: ICodefendTransformationOptions;
   debug?: IWebpackCodefendDebugOptions;
 };

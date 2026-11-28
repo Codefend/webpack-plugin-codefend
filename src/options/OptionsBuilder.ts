@@ -14,7 +14,6 @@ export class OptionsBuilder {
 
   setOptions(pluginOptions: IWebpackCodefendOptions): this {
     this.pluginOptions = pluginOptions;
-    this.libraryOptions = OptionsAdapter.transform(pluginOptions);
     return this;
   }
 
@@ -35,6 +34,7 @@ export class OptionsBuilder {
 
   build(): IWebpackCodefendInternalOptions {
     OptionsValidator.validateOptions(this.name, this.pluginOptions);
+    this.libraryOptions = OptionsAdapter.transform(this.pluginOptions);
 
     this._fillAdditionalIgnoreWords();
     return this.libraryOptions;

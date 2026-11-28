@@ -1,6 +1,6 @@
 {
   "name": "webpack-plugin-codefend",
-  "version": "3.2.2",
+  "version": "3.3.0",
   "description": "Webpack plugin for code obfuscation based on Codefend",
   "keywords": [
     "webpack",
@@ -64,7 +64,7 @@
     "webpack": "^5.113.0"
   },
   "dependencies": {
-    "codefend": "^3.2.1",
+    "codefend": "^3.3.0",
     "schema-utils": "^4.8.5"
   },
   "peerDependencies": {
